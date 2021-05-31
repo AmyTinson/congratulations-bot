@@ -17,7 +17,7 @@ client.login(process.env.TOKEN)
 const youtubeVids = require('./youtube-vids')
 
 // HELPER FUNCS ******************************
-function getRandomNumber() {
+function getRandomNumber () {
   return Math.floor(Math.random() * (youtubeVids.array.length - 0 + 1) + 0)
 }
 
