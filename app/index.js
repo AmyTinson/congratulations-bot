@@ -3,7 +3,12 @@
 const dotenv = require('dotenv')
 dotenv.config()
 
-// Bot set-up
+// Get the stuff to do moar stuff
+const youtubeVids = require('./data/youtube-vids')
+const { getRandomNumber } = require('./funcs/getRandomNumber')
+const { inputCheck } = require('./funcs/inputCheck')
+
+// Discord Bot Setup
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
@@ -13,26 +18,17 @@ client.once('ready', () => {
 
 client.login(process.env.TOKEN)
 
-// Get YouTube videos to send (array of strings)
-const youtubeVids = require('./youtube-vids')
-
-// HELPER FUNCS ******************************
-function getRandomNumber () {
-  return Math.floor(Math.random() * (youtubeVids.array.length - 0 + 1) + 0)
-}
-
 // The actual fun BOT stuffs
-client.on('message', (message) => {
-  const botStuffs = async () => {
-    const randomNumber = await getRandomNumber()
-    const caseInsensitiveMessage = await message.content.toLowerCase()
-    if (
-      caseInsensitiveMessage.includes('congrats') ||
-      caseInsensitiveMessage.includes('congratulations') ||
-      caseInsensitiveMessage.includes('has reached level')
-    ) {
-      message.channel.send(youtubeVids.array[randomNumber])
-    }
+client.on('message', async (message) => {
+  if (inputCheck(message.content) && !message.author.bot) {
+    const randomNumber = await getRandomNumber(youtubeVids.array)
+    console.log(randomNumber)
+    const randomVideo = await youtubeVids.array[randomNumber]
+    message.channel.send(randomVideo)
   }
-  botStuffs()
+})
+
+// Error Information
+process.on('unhandledRejection', error => {
+  console.error('Unhandled promise rejection:', error)
 })
