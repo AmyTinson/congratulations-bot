@@ -22,7 +22,6 @@ client.login(process.env.TOKEN)
 client.on('message', async (message) => {
   if (inputCheck(message.content) && !message.author.bot) {
     const randomNumber = await getRandomNumber(youtubeVids.array)
-    console.log(randomNumber)
     const randomVideo = await youtubeVids.array[randomNumber]
     message.channel.send(randomVideo)
   }
