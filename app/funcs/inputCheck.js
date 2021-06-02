@@ -20,7 +20,7 @@ const inputCheck = (userMessageContent) => {
   })
 
   // Checks for level up
-  if (caseInsensitiveMessage.match(keyPhrases.regex)) {
+  if (caseInsensitiveMessage.match(keyPhrases.levelRegex) || caseInsensitiveMessage.match(keyPhrases.congratSpacedOutRegex)) {
     match = true
   }
 
