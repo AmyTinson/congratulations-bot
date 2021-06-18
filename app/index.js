@@ -20,7 +20,7 @@ client.login(process.env.TOKEN)
 
 // The actual fun BOT stuffs
 client.on('message', async (message) => {
-  if (inputCheck(message.content) && !message.author.bot) {
+  if (inputCheck(message.content)) {
     const randomNumber = await getRandomNumber(youtubeVids.array)
     const randomVideo = await youtubeVids.array[randomNumber]
     message.channel.send(randomVideo)
