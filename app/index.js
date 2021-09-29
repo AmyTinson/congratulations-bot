@@ -1,14 +1,23 @@
-// SET UP ******************************
-// Pull in env variables
 const dotenv = require('dotenv')
 dotenv.config()
 
-// Get the stuff to do moar stuff
-const youtubeVids = require('./data/youtube-vids')
 const { getRandomNumber } = require('./funcs/getRandomNumber')
-const { inputCheck } = require('./funcs/inputCheck')
+const { checkForKeyPhrase } = require('./funcs/checkForKeyPhrase')
+const { getRandomTenorGifs } = require('./funcs/getRandomTenorGifs')
 
-// Discord Bot Setup
+let randomCongratsGifs
+
+// TODO - clean this up into its own func and import/call it
+const getRandomCongratsGifs = async () => {
+  try {
+    randomCongratsGifs = await getRandomTenorGifs('congratulations', process.env.TENOR_KEY)
+    return randomCongratsGifs
+  } catch (error) {
+    console.error('Error grabbing GIFS', error)
+  }
+}
+getRandomCongratsGifs()
+
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
@@ -18,16 +27,21 @@ client.once('ready', () => {
 
 client.login(process.env.TOKEN)
 
-// The actual fun BOT stuffs
 client.on('message', async (message) => {
-  if (inputCheck(message.content)) {
-    const randomNumber = await getRandomNumber(youtubeVids.array)
-    const randomVideo = await youtubeVids.array[randomNumber]
-    message.channel.send(randomVideo)
+  // v TODO - clean this up into its own testable module
+  const messageContainsCongrats = checkForKeyPhrase(message.content)
+
+  const congratsGifsAvailable = !!randomCongratsGifs
+
+  if (messageContainsCongrats && congratsGifsAvailable) {
+    const randomNumber = getRandomNumber(randomCongratsGifs)
+    const randomGif = randomCongratsGifs[randomNumber].url
+    // ^ TODO - clean this up into its own testable module
+
+    message.channel.send(randomGif)
   }
 })
 
-// Error Information
 process.on('unhandledRejection', error => {
   console.error('Unhandled promise rejection:', error)
 })
