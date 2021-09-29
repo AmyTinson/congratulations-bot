@@ -1,7 +1,5 @@
-/**
- * @param {*} array
- * @returns A random number
- */
+// TODO - consolidate funcs files and write tests
+
 const getRandomNumber = (array) => {
   return Math.floor(Math.random() * array.length)
 }
