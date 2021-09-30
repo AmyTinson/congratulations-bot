@@ -18,8 +18,8 @@ const getRandomCongratsGifs = async () => {
 }
 getRandomCongratsGifs()
 
-const Discord = require('discord.js')
-const client = new Discord.Client()
+const { Client, Intents } = require('discord.js')
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 
 client.once('ready', () => {
   console.log('Ready!')
@@ -27,7 +27,7 @@ client.once('ready', () => {
 
 client.login(process.env.TOKEN)
 
-client.on('message', async (message) => {
+client.on('messageCreate', async (message) => {
   // v TODO - clean this up into its own testable module
   const messageContainsCongrats = checkForKeyPhrase(message.content)
 
