@@ -1,5 +1,3 @@
-// TODO - consolidate funcs files and write tests
-
 const axios = require('axios')
 
 const getRandomTenorGifs = async (query, key) => {
