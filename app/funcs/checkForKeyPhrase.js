@@ -1,5 +1,3 @@
-// TODO - consolidate funcs files and write tests
-
 const keyPhrases = require('../data/keyPhrases')
 
 const checkForKeyPhrase = (userMessageContent) => {
