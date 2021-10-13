@@ -8,6 +8,5 @@ You can **[add it to your Discord server here](https://discord.com/oauth2/author
 
 > Note: A person adding the bot needs “Manage Server” permissions to do so.
 
-
-https://user-images.githubusercontent.com/81831180/123498935-f5f8cf00-d600-11eb-95d1-8c282a0ed59f.mp4
+https://user-images.githubusercontent.com/81831180/137216494-2e450242-74c3-41aa-8ceb-ddc2c5d507f0.mp4
 
