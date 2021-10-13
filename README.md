@@ -1,6 +1,6 @@
 # Congratulations Bot
 
-A mostly useless Discord bot that sends a congratulatory video upon sending congratulatory remarks!
+A mostly useless Discord bot that sends a congratulatory GIF upon sending congratulatory remarks!
 
 It also responds to Arcane bot level up messages (ex. @Amii has reached level **9001**).
 
